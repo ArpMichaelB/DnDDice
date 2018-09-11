@@ -26,8 +26,7 @@ import javafx.stage.Stage;
  */
 public class Dice extends Application{
 
-    TextField howmany = new TextField();
-    TextField sides = new TextField();//these fields are global so the button handler can see what I've typed
+    TextField dicetext = new TextField();//the fields is global so the button handler can see what I've typed
     Stage rollStage = new Stage();
     //this stage is global because it keeps the W I N D O W V O I D from happening 
     //since it being global lets the methods close the window before starting so the windows don't layer 
@@ -45,15 +44,13 @@ public class Dice extends Application{
         Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
         labels.getChildren().add(howmanylabel);
         labels.getChildren().add(sideslabel);//add the labels to their vbox
-        inputs.getChildren().add(howmany);
-        inputs.getChildren().add(sides);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
+        inputs.getChildren().add(dicetext);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
         wrapbois.getChildren().add(labels);
         wrapbois.getChildren().add(inputs);
         wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
         btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
         btRoll.setOnAction(new rollhandler());//wire the button for clickies
-        howmany.setOnKeyPressed(new rollhandlerKey());
-        sides.setOnKeyPressed(new rollhandlerKey());
+        dicetext.setOnKeyPressed(new rollhandlerKey());
         btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
         Scene primscene = new Scene(wrapbois,menuSize,menuSizeTwo);
         primaryStage.setScene(primscene);//make the scene and set it to the menu window
@@ -70,6 +67,13 @@ public class Dice extends Application{
         int r = (int) (Math.random()*max+min);
         return r;
     }
+    
+    public int[] parseInput()
+    {
+        int[] ret = {0,0};
+        
+        return ret;
+    }
 
     class rollhandler implements EventHandler<ActionEvent> {
         
@@ -83,8 +87,10 @@ public class Dice extends Application{
             int numface = 0;
             try{
                 rollStage.close();//this fixes W I N D O W V O I D
-                numdice = Integer.parseInt(howmany.getText());
-                numface = Integer.parseInt(sides.getText());
+                int[] dicedeets = {0,0};
+                dicedeets = parseInput();
+                numdice = dicedeets[0];
+                numface = dicedeets[1];
                 if (numdice<=0 || numface <=0)
                 {
                     throw new NumberFormatException();
