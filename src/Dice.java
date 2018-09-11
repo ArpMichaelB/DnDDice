@@ -70,8 +70,26 @@ public class Dice extends Application{
     
     public int[] parseInput()
     {
-        int[] ret = {0,0};
-        
+        int[] ret = {0,0,0};
+        String input = dicetext.getText();
+        String numberOfDice = "";
+        String numberOfFaces = "";
+        String bonus = "";
+        String[] diceDetails = input.split("d");
+        numberOfDice = diceDetails[0];
+        diceDetails = diceDetails[1].split("\\+|-");
+        numberOfFaces = diceDetails[0];
+        bonus = diceDetails[1];
+        ret[0] = Integer.parseInt(numberOfDice);
+        ret[1] = Integer.parseInt(numberOfFaces);
+        if(bonus.isEmpty())
+        {
+            ret[2] = 0;
+        }
+        else
+        {
+            ret[2] = Integer.parseInt(bonus);
+        }
         return ret;
     }
 
@@ -85,9 +103,11 @@ public class Dice extends Application{
             String numberHolder = "You Rolled:\n";
             int numdice = 0;
             int numface = 0;
+            int bonus = 0;
+            int total = 0;
             try{
                 rollStage.close();//this fixes W I N D O W V O I D
-                int[] dicedeets = {0,0};
+                int[] dicedeets = {0,0,0};
                 dicedeets = parseInput();
                 numdice = dicedeets[0];
                 numface = dicedeets[1];
