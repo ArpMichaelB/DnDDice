@@ -26,8 +26,7 @@ import javafx.stage.Stage;
  */
 public class Dice extends Application{
 
-    TextField howmany = new TextField();
-    TextField sides = new TextField();//these fields are global so the button handler can see what I've typed
+    TextField dicetext = new TextField();//the fields is global so the button handler can see what I've typed
     Stage rollStage = new Stage();
     //this stage is global because it keeps the W I N D O W V O I D from happening 
     //since it being global lets the methods close the window before starting so the windows don't layer 
@@ -40,20 +39,16 @@ public class Dice extends Application{
         VBox inputs = new VBox();
         VBox labels = new VBox();
         HBox wrapbois = new HBox();
-        Text howmanylabel = new Text("How many dice are we rolling?");
-        Text sideslabel = new Text("How many sides on the dice?");//make the labels for the text boxes
+        Text diceinputlabel = new Text("Input your roll in standard format");
         Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
-        labels.getChildren().add(howmanylabel);
-        labels.getChildren().add(sideslabel);//add the labels to their vbox
-        inputs.getChildren().add(howmany);
-        inputs.getChildren().add(sides);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
+        labels.getChildren().add(diceinputlabel);
+        inputs.getChildren().add(dicetext);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
         wrapbois.getChildren().add(labels);
         wrapbois.getChildren().add(inputs);
         wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
         btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
         btRoll.setOnAction(new rollhandler());//wire the button for clickies
-        howmany.setOnKeyPressed(new rollhandlerKey());
-        sides.setOnKeyPressed(new rollhandlerKey());
+        dicetext.setOnKeyPressed(new rollhandlerKey());
         btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
         Scene primscene = new Scene(wrapbois,menuSize,menuSizeTwo);
         primaryStage.setScene(primscene);//make the scene and set it to the menu window
@@ -70,6 +65,31 @@ public class Dice extends Application{
         int r = (int) (Math.random()*max+min);
         return r;
     }
+    
+    public int[] parseInput()
+    {
+        int[] ret = {0,0,0};
+        String input = dicetext.getText();
+        String numberOfDice = "";
+        String numberOfFaces = "";
+        String bonus = "";
+        String[] diceDetails = input.split("d");
+        numberOfDice = diceDetails[0];
+        diceDetails = diceDetails[1].split("\\+|-");
+        numberOfFaces = diceDetails[0];
+        bonus = diceDetails[1];
+        ret[0] = Integer.parseInt(numberOfDice);
+        ret[1] = Integer.parseInt(numberOfFaces);
+        if(bonus.isEmpty())
+        {
+            ret[2] = 0;
+        }
+        else
+        {
+            ret[2] = Integer.parseInt(bonus);
+        }
+        return ret;
+    }
 
     class rollhandler implements EventHandler<ActionEvent> {
         
@@ -81,10 +101,15 @@ public class Dice extends Application{
             String numberHolder = "You Rolled:\n";
             int numdice = 0;
             int numface = 0;
+            int bonus = 0;
+            int total = 0;
             try{
                 rollStage.close();//this fixes W I N D O W V O I D
-                numdice = Integer.parseInt(howmany.getText());
-                numface = Integer.parseInt(sides.getText());
+                int[] dicedeets = {0,0,0};
+                dicedeets = parseInput();
+                numdice = dicedeets[0];
+                numface = dicedeets[1];
+                bonus = dicedeets[2];
                 if (numdice<=0 || numface <=0)
                 {
                     throw new NumberFormatException();
@@ -92,13 +117,24 @@ public class Dice extends Application{
                 //get the number of dice being rolled and the number of faces each die has
                 for(int i = 0; i <numdice; i++)
                 {
-                    numberHolder += rand(1,numface);
+                    int temp = rand(1,numface);
+                    numberHolder += temp;
                     numberHolder += "\n";
+                    total+=temp;
                 }
                 //however many dice are being rolled, pick a number between 1 and the number of faces each die has at random
                 //i.e. roll the dice
                 //then add the number to a holder
                 //may change this later to instead add an image of the die face corresponding with the number rolled to the scene
+                numberHolder+="Your total is: ";
+                if(dicetext.getText().contains("-"))
+                {
+                    numberHolder+=(total-bonus);
+                }
+                else if(dicetext.getText().contains("+"))
+                {
+                    numberHolder+=(total+bonus);
+                }
                 results.setText(numberHolder);//make the results text part of the display 
                 Scene rollScene = new Scene(aech,resSize,resSizeTwo);
                 rollStage.setScene(rollScene);//set the scene of the roll display to be the one containing the results
