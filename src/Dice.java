@@ -39,11 +39,9 @@ public class Dice extends Application{
         VBox inputs = new VBox();
         VBox labels = new VBox();
         HBox wrapbois = new HBox();
-        Text howmanylabel = new Text("How many dice are we rolling?");
-        Text sideslabel = new Text("How many sides on the dice?");//make the labels for the text boxes
+        Text diceinputlabel = new Text("Input your roll in standard format");
         Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
-        labels.getChildren().add(howmanylabel);
-        labels.getChildren().add(sideslabel);//add the labels to their vbox
+        labels.getChildren().add(diceinputlabel);
         inputs.getChildren().add(dicetext);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
         wrapbois.getChildren().add(labels);
         wrapbois.getChildren().add(inputs);
@@ -111,6 +109,7 @@ public class Dice extends Application{
                 dicedeets = parseInput();
                 numdice = dicedeets[0];
                 numface = dicedeets[1];
+                bonus = dicedeets[2];
                 if (numdice<=0 || numface <=0)
                 {
                     throw new NumberFormatException();
@@ -118,13 +117,24 @@ public class Dice extends Application{
                 //get the number of dice being rolled and the number of faces each die has
                 for(int i = 0; i <numdice; i++)
                 {
-                    numberHolder += rand(1,numface);
+                    int temp = rand(1,numface);
+                    numberHolder += temp;
                     numberHolder += "\n";
+                    total+=temp;
                 }
                 //however many dice are being rolled, pick a number between 1 and the number of faces each die has at random
                 //i.e. roll the dice
                 //then add the number to a holder
                 //may change this later to instead add an image of the die face corresponding with the number rolled to the scene
+                numberHolder+="Your total is:";
+                if(dicetext.getText().contains("-"))
+                {
+                    numberHolder+=(total-bonus);
+                }
+                else if(dicetext.getText().contains("+"))
+                {
+                    numberHolder+=(total+bonus);
+                }
                 results.setText(numberHolder);//make the results text part of the display 
                 Scene rollScene = new Scene(aech,resSize,resSizeTwo);
                 rollStage.setScene(rollScene);//set the scene of the roll display to be the one containing the results
