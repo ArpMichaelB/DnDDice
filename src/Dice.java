@@ -126,7 +126,7 @@ public class Dice extends Application{
                 //i.e. roll the dice
                 //then add the number to a holder
                 //may change this later to instead add an image of the die face corresponding with the number rolled to the scene
-                numberHolder+="Your total is:";
+                numberHolder+="Your total is: ";
                 if(dicetext.getText().contains("-"))
                 {
                     numberHolder+=(total-bonus);
