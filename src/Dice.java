@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -26,7 +27,12 @@ import javafx.stage.Stage;
  */
 public class Dice extends Application{
 
-    TextField dicetext = new TextField();//the fields is global so the button handler can see what I've typed
+    TextField oneLineDiceText = new TextField();
+    TextField howmany = new TextField();
+    TextField sides = new TextField();
+    RadioButton oneLine = new RadioButton("Input on one line (a-la 1d20+1)");
+    RadioButton multiLine = new RadioButton("Input sides and number of dice separately");
+    //the text fields and radiobuttons are global because several handlers need to access them
     Stage rollStage = new Stage();
     //this stage is global because it keeps the W I N D O W V O I D from happening 
     //since it being global lets the methods close the window before starting so the windows don't layer 
@@ -36,23 +42,17 @@ public class Dice extends Application{
     int menuSizeTwo = 105;//the size of the menu, in case I need to point it out more than once (I shouldn't)
     @Override
     public void start(Stage primaryStage) throws Exception {
-        VBox inputs = new VBox();
-        VBox labels = new VBox();
-        HBox wrapbois = new HBox();
-        Text diceinputlabel = new Text("Input your roll in standard format");
-        Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
-        labels.getChildren().add(diceinputlabel);
-        inputs.getChildren().add(dicetext);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
-        wrapbois.getChildren().add(labels);
-        wrapbois.getChildren().add(inputs);
-        wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
-        btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
-        btRoll.setOnAction(new rollhandler());//wire the button for clickies
-        dicetext.setOnKeyPressed(new rollhandlerKey());
-        btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
-        Scene primscene = new Scene(wrapbois,menuSize,menuSizeTwo);
-        primaryStage.setScene(primscene);//make the scene and set it to the menu window
-        primaryStage.show();//show the menu window
+        VBox radioButtons = new VBox();
+        HBox wrapThings = new HBox();
+        Button btChoose = new Button("Choose the selected input method");
+        radioButtons.getChildren().add(oneLine);
+        radioButtons.getChildren().add(multiLine);
+        wrapThings.getChildren().add(radioButtons);
+        wrapThings.getChildren().add(btChoose);
+        btChoose.setOnAction(new showCorrectInputHandler());
+        Scene primaryScene = new Scene(wrapThings,menuSize,menuSizeTwo);
+        primaryStage.setScene(primaryScene);
+        primaryStage.show();
     }
     /**
      * because I'm too lazy to type math.random and remember how to get what I want out of it
@@ -66,10 +66,10 @@ public class Dice extends Application{
         return r;
     }
     
-    public int[] parseInput()
+    public int[] parseOneLineInput()
     {
         int[] ret = {0,0,0};
-        String input = dicetext.getText();
+        String input = oneLineDiceText.getText();
         String numberOfDice = "";
         String numberOfFaces = "";
         String bonus = "";
@@ -91,10 +91,116 @@ public class Dice extends Application{
         return ret;
     }
 
-    class rollhandler implements EventHandler<ActionEvent> {
+    class showCorrectInputHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            if(oneLine.isSelected())
+            {
+                howmany.setText("");
+                sides.setText("");
+                //set these two boxes to have no text in them so the keypress handler works right
+                Stage oneLineStage = new Stage();
+                VBox inputs = new VBox();
+                VBox labels = new VBox();
+                HBox wrapbois = new HBox();
+                Text diceinputlabel = new Text("Input your roll in standard format");
+                Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
+                labels.getChildren().add(diceinputlabel);
+                inputs.getChildren().add(oneLineDiceText);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
+                wrapbois.getChildren().add(labels);
+                wrapbois.getChildren().add(inputs);
+                wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
+                btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
+                btRoll.setOnAction(new oneLineRollHandler());//wire the button for clickies
+                oneLineDiceText.setOnKeyPressed(new rollhandlerKey());
+                btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
+                Scene primscene = new Scene(wrapbois,menuSize,menuSizeTwo);
+                oneLineStage.setScene(primscene);//make the scene and set it to the menu window
+                oneLineStage.show();//show the menu window
+            }
+            else if(multiLine.isSelected())
+            {
+                oneLineDiceText.setText("");
+                //empty the single line text so the keypress handler works right
+                Stage multiLineStage = new Stage();
+                VBox inputs = new VBox();
+                VBox labels = new VBox();
+                HBox wrapbois = new HBox();
+                Text howmanylabel = new Text("How many dice are we rolling?");
+                Text sideslabel = new Text("How many sides on the dice?");//make the labels for the text boxes
+                Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
+                labels.getChildren().add(howmanylabel);
+                labels.getChildren().add(sideslabel);//add the labels to their vbox
+                inputs.getChildren().add(howmany);
+                inputs.getChildren().add(sides);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
+                wrapbois.getChildren().add(labels);
+                wrapbois.getChildren().add(inputs);
+                wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
+                btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
+                btRoll.setOnAction(new multiLineRollHandler());//wire the button for clickies
+                howmany.setOnKeyPressed(new rollhandlerKey());
+                sides.setOnKeyPressed(new rollhandlerKey());
+                btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
+                Scene primscene = new Scene(wrapbois,menuSize,menuSizeTwo);
+                multiLineStage.setScene(primscene);//make the scene and set it to the menu window
+                multiLineStage.show();//show the menu window
+            }
+        }
+    }
+
+    class multiLineRollHandler implements EventHandler<ActionEvent>
+    {
+
+        @Override
+        public void handle(ActionEvent event) {
+            HBox aech = new HBox();
+            Text results = new Text("yoooo");
+            aech.getChildren().add(results);
+            String numberHolder = "You Rolled:\n";
+            int numdice = 0;
+            int numface = 0;
+            try{
+                rollStage.close();//this fixes W I N D O W V O I D
+                numdice = Integer.parseInt(howmany.getText());
+                numface = Integer.parseInt(sides.getText());
+                if (numdice<=0 || numface <=0)
+                {
+                    throw new NumberFormatException();
+                }
+                //get the number of dice being rolled and the number of faces each die has
+                for(int i = 0; i <numdice; i++)
+                {
+                    numberHolder += rand(1,numface);
+                    numberHolder += "\n";
+                }
+                //however many dice are being rolled, pick a number between 1 and the number of faces each die has at random
+                //i.e. roll the dice
+                //then add the number to a holder
+                //may change this later to instead add an image of the die face corresponding with the number rolled to the scene
+                results.setText(numberHolder);//make the results text part of the display 
+                Scene rollScene = new Scene(aech,resSize,resSizeTwo);
+                rollStage.setScene(rollScene);//set the scene of the roll display to be the one containing the results
+                rollStage.show();//show the results
+            }
+            catch(NumberFormatException e)
+            {
+                rollStage.close();
+                //if one of the numbers was not a number, tell the user they goofed.
+                results.setText("one of those \"numbers\" isn't a number that's on dice. why do you gotta.");
+                Scene rollScene = new Scene(aech,menuSize,menuSizeTwo);
+                rollStage.setScene(rollScene);
+                rollStage.show();
+            }
+        }
+        
+    }
+    
+    class oneLineRollHandler implements EventHandler<ActionEvent> {
         
         @Override
         public void handle(ActionEvent event) {
+            //TODO: Fix this crashing when there's no bonus inputted
             HBox aech = new HBox();
             Text results = new Text("yoooo");
             aech.getChildren().add(results);
@@ -106,7 +212,7 @@ public class Dice extends Application{
             try{
                 rollStage.close();//this fixes W I N D O W V O I D
                 int[] dicedeets = {0,0,0};
-                dicedeets = parseInput();
+                dicedeets = parseOneLineInput();
                 numdice = dicedeets[0];
                 numface = dicedeets[1];
                 bonus = dicedeets[2];
@@ -127,11 +233,11 @@ public class Dice extends Application{
                 //then add the number to a holder
                 //may change this later to instead add an image of the die face corresponding with the number rolled to the scene
                 numberHolder+="Your total is: ";
-                if(dicetext.getText().contains("-"))
+                if(oneLineDiceText.getText().contains("-"))
                 {
                     numberHolder+=(total-bonus);
                 }
-                else if(dicetext.getText().contains("+"))
+                else if(oneLineDiceText.getText().contains("+"))
                 {
                     numberHolder+=(total+bonus);
                 }
@@ -157,8 +263,16 @@ public class Dice extends Application{
         public void handle(KeyEvent event) {
             if(event.getCode().equals(KeyCode.ENTER))
             {
-                new rollhandler().handle(new ActionEvent());
-                //basically, if the key pressed was enter, do the stuff needed to roll dice like they've clicked the button
+                if(!oneLineDiceText.getText().isEmpty())
+                {
+                    new oneLineRollHandler().handle(new ActionEvent());
+                }
+                else if(!howmany.getText().isEmpty() && !sides.getText().isEmpty())
+                {
+                    new multiLineRollHandler().handle(new ActionEvent());
+                }
+                //basically, if the key pressed was enter, do the stuff needed to roll dice
+                //based on which text fields have text
                 //otherwise do NOT A DARN THING
             }
         }
