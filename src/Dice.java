@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -44,7 +45,10 @@ public class Dice extends Application{
     public void start(Stage primaryStage) throws Exception {
         VBox radioButtons = new VBox();
         HBox wrapThings = new HBox();
+        ToggleGroup toggleGroup = new ToggleGroup();
         Button btChoose = new Button("Choose the selected input method");
+        oneLine.setToggleGroup(toggleGroup);
+        multiLine.setToggleGroup(toggleGroup);
         radioButtons.getChildren().add(oneLine);
         radioButtons.getChildren().add(multiLine);
         wrapThings.getChildren().add(radioButtons);
@@ -77,7 +81,10 @@ public class Dice extends Application{
         numberOfDice = diceDetails[0];
         diceDetails = diceDetails[1].split("\\+|-");
         numberOfFaces = diceDetails[0];
-        bonus = diceDetails[1];
+        if(diceDetails.length==2)
+        {
+            bonus = diceDetails[1];
+        }
         ret[0] = Integer.parseInt(numberOfDice);
         ret[1] = Integer.parseInt(numberOfFaces);
         if(bonus.isEmpty())
@@ -240,6 +247,10 @@ public class Dice extends Application{
                 else if(oneLineDiceText.getText().contains("+"))
                 {
                     numberHolder+=(total+bonus);
+                }
+                else
+                {
+                    numberHolder+=(total);
                 }
                 results.setText(numberHolder);//make the results text part of the display 
                 Scene rollScene = new Scene(aech,resSize,resSizeTwo);
