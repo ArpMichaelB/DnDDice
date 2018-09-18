@@ -186,15 +186,12 @@ public class Dice extends Application{
             String numberHolder = "You Rolled:\n";
             int numdice = 0;
             int numface = 0;
-            int bonus = 0;
-            int total = 0;
             try{
                 rollStage.close();//this fixes W I N D O W V O I D
-                int[] dicedeets = {0,0,0};
-                dicedeets = parseInput();
+                int[] dicedeets = {0,0};
+                dicedeets = parseMultiLineInput();
                 numdice = dicedeets[0];
                 numface = dicedeets[1];
-                bonus = dicedeets[2];
                 if (numdice<=0 || numface <=0)
                 {
                     throw new NumberFormatException();
@@ -205,7 +202,6 @@ public class Dice extends Application{
                     int temp = rand(1,numface);
                     numberHolder += temp;
                     numberHolder += "\n";
-                    total+=temp;
                 }
                 //however many dice are being rolled, pick a number between 1 and the number of faces each die has at random
                 //i.e. roll the dice
@@ -225,6 +221,13 @@ public class Dice extends Application{
                 rollStage.show();
             }
         }
+
+		private int[] parseMultiLineInput() {
+			int[] temp = {0,0};
+			temp[0] = Integer.parseInt(howmany.getText());
+			temp[1] = Integer.parseInt(sides.getText());
+			return temp;
+		}
         
     }
     
