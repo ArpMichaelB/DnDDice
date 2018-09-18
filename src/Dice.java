@@ -113,14 +113,13 @@ public class Dice extends Application{
         public void handle(ActionEvent event) {
             if(oneLine.isSelected())
             {
-            	Stage oneLineStage = new Stage();
+            	  Stage oneLineStage = new Stage();
                 Scene primscene = setupOneLineHandler();
                 oneLineStage.setScene(primscene);//make the scene and set it to a window
                 oneLineStage.show();//show the menu window
             }
             else if(multiLine.isSelected())
             {
-                
                 Stage multiLineStage = new Stage();
                 Scene primscene = setupMultiLineHandler();
                 multiLineStage.setScene(primscene);//make the scene and set it to a window
@@ -129,50 +128,50 @@ public class Dice extends Application{
         }
 
 		private Scene setupMultiLineHandler() {
-			oneLineDiceText.setText("");
-			//empty the single line text so the keypress handler works right
-			VBox inputs = new VBox();
-			VBox labels = new VBox();
-			HBox wrapbois = new HBox();
-			Text howmanylabel = new Text("How many dice are we rolling?");
-			Text sideslabel = new Text("How many sides on the dice?");//make the labels for the text boxes
-			Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
-			labels.getChildren().add(howmanylabel);
-			labels.getChildren().add(sideslabel);//add the labels to their vbox
-			inputs.getChildren().add(howmany);
-			inputs.getChildren().add(sides);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
-			wrapbois.getChildren().add(labels);
-			wrapbois.getChildren().add(inputs);
-			wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
-			btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
-			btRoll.setOnAction(new multiLineRollHandler());//wire the button for clickies
-			howmany.setOnKeyPressed(new rollhandlerKey());
-			sides.setOnKeyPressed(new rollhandlerKey());
-			btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
-			Scene scene = new Scene(wrapbois,menuSize,menuSizeTwo);
-			return scene;
+        oneLineDiceText.setText("");
+        //empty the single line text so the keypress handler works right
+        VBox inputs = new VBox();
+        VBox labels = new VBox();
+        HBox wrapbois = new HBox();
+        Text howmanylabel = new Text("How many dice are we rolling?");
+        Text sideslabel = new Text("How many sides on the dice?");//make the labels for the text boxes
+        Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
+        labels.getChildren().add(howmanylabel);
+        labels.getChildren().add(sideslabel);//add the labels to their vbox
+        inputs.getChildren().add(howmany);
+        inputs.getChildren().add(sides);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
+        wrapbois.getChildren().add(labels);
+        wrapbois.getChildren().add(inputs);
+        wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
+        btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
+        btRoll.setOnAction(new multiLineRollHandler());//wire the button for clickies
+        howmany.setOnKeyPressed(new rollhandlerKey());
+        sides.setOnKeyPressed(new rollhandlerKey());
+        btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
+        Scene scene = new Scene(wrapbois,menuSize,menuSizeTwo);
+        return scene;
 		}
 
 		private Scene setupOneLineHandler() {
-			howmany.setText("");
-            sides.setText("");
-            //set these two boxes to have no text in them so the keypress handler works right
-            VBox inputs = new VBox();
-            VBox labels = new VBox();
-            HBox wrapbois = new HBox();
-            Text diceinputlabel = new Text("Input your roll in standard format");
-            Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
-            labels.getChildren().add(diceinputlabel);
-            inputs.getChildren().add(oneLineDiceText);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
-            wrapbois.getChildren().add(labels);
-            wrapbois.getChildren().add(inputs);
-            wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
-            btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
-            btRoll.setOnAction(new oneLineRollHandler());//wire the button for clickies
-            oneLineDiceText.setOnKeyPressed(new rollhandlerKey());
-            btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
-            Scene scene = new Scene(wrapbois,menuSize,menuSizeTwo);
-            return scene;
+        howmany.setText("");
+        sides.setText("");
+        //set these two boxes to have no text in them so the keypress handler works right
+        VBox inputs = new VBox();
+        VBox labels = new VBox();
+        HBox wrapbois = new HBox();
+        Text diceinputlabel = new Text("Input your roll in standard format");
+        Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
+        labels.getChildren().add(diceinputlabel);
+        inputs.getChildren().add(oneLineDiceText);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
+        wrapbois.getChildren().add(labels);
+        wrapbois.getChildren().add(inputs);
+        wrapbois.getChildren().add(btRoll);//add the labels, inputs, and the button to press to roll the dice to the thing that goes in the window
+        btRoll.setAlignment(Pos.CENTER);//align the button center because reasons
+        btRoll.setOnAction(new oneLineRollHandler());//wire the button for clickies
+        oneLineDiceText.setOnKeyPressed(new rollhandlerKey());
+        btRoll.setOnKeyPressed(new rollhandlerKey());//wire all the focusable things for to do an allowance of using the enter key
+        Scene scene = new Scene(wrapbois,menuSize,menuSizeTwo);
+        return scene;
 		}
     }
 
@@ -187,10 +186,15 @@ public class Dice extends Application{
             String numberHolder = "You Rolled:\n";
             int numdice = 0;
             int numface = 0;
+            int bonus = 0;
+            int total = 0;
             try{
                 rollStage.close();//this fixes W I N D O W V O I D
-                numdice = Integer.parseInt(howmany.getText());
-                numface = Integer.parseInt(sides.getText());
+                int[] dicedeets = {0,0,0};
+                dicedeets = parseInput();
+                numdice = dicedeets[0];
+                numface = dicedeets[1];
+                bonus = dicedeets[2];
                 if (numdice<=0 || numface <=0)
                 {
                     throw new NumberFormatException();
@@ -198,8 +202,10 @@ public class Dice extends Application{
                 //get the number of dice being rolled and the number of faces each die has
                 for(int i = 0; i <numdice; i++)
                 {
-                    numberHolder += rand(1,numface);
+                    int temp = rand(1,numface);
+                    numberHolder += temp;
                     numberHolder += "\n";
+                    total+=temp;
                 }
                 //however many dice are being rolled, pick a number between 1 and the number of faces each die has at random
                 //i.e. roll the dice
