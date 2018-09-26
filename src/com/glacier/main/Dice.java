@@ -1,24 +1,20 @@
 package com.glacier.main;
 
 
+import com.glacier.handlers.showCorrectInputHandler;
+import com.glacier.util.Utility;
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import com.glacier.handlers.*;
-import com.glacier.util.Utility;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,15 +27,30 @@ import com.glacier.util.Utility;
  * @author Michael
  */
 public class Dice extends Application{
-
-    @Override
+	@Override
     public void start(Stage primaryStage) throws Exception {
-        VBox radioButtons = new VBox();
+    	VBox radioButtons = new VBox();
         HBox wrapThings = new HBox();
+        
         ToggleGroup toggleGroup = new ToggleGroup();
         Button btChoose = new Button("Choose the selected input method");
         RadioButton oneLine = new RadioButton("Input on one line (a-la 1d20+1)");
         RadioButton multiLine = new RadioButton("Input sides and number of dice separately");
+        oneLine.selectedProperty().addListener(
+        new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+                btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected()));
+            }
+        });
+        multiLine.selectedProperty().addListener(
+        new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+                btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected()));
+            }
+        });
+        //any time we change the selected type, update the action for the choose button to reflect that change
         oneLine.setToggleGroup(toggleGroup);
         multiLine.setToggleGroup(toggleGroup);
         radioButtons.getChildren().add(oneLine);

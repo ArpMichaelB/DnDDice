@@ -2,6 +2,8 @@ package com.glacier.handlers;
 
 import com.glacier.util.Utility;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -53,6 +55,25 @@ public class showCorrectInputHandler implements EventHandler<ActionEvent>
         Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
         TextField diceToRoll = new TextField();
         TextField sidesOnDice = new TextField();
+        diceToRoll.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> obs, String previous, String newThing) {
+            	btRoll.setOnAction(new multiLineRollHandler(sidesOnDice.getText(),diceToRoll.getText()));//wire the button for clickies
+                diceToRoll.setOnKeyPressed(new rollhandlerKey(sidesOnDice.getText(),diceToRoll.getText()));
+                sidesOnDice.setOnKeyPressed(new rollhandlerKey(sidesOnDice.getText(),diceToRoll.getText()));
+                btRoll.setOnKeyPressed(new rollhandlerKey(sidesOnDice.getText(),diceToRoll.getText()));//wire all the focusable things for to do an allowance of using the enter key
+            }
+        });
+        sidesOnDice.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> obs, String previous, String newThing) {
+            	btRoll.setOnAction(new multiLineRollHandler(sidesOnDice.getText(),diceToRoll.getText()));//wire the button for clickies
+                diceToRoll.setOnKeyPressed(new rollhandlerKey(sidesOnDice.getText(),diceToRoll.getText()));
+                sidesOnDice.setOnKeyPressed(new rollhandlerKey(sidesOnDice.getText(),diceToRoll.getText()));
+                btRoll.setOnKeyPressed(new rollhandlerKey(sidesOnDice.getText(),diceToRoll.getText()));//wire all the focusable things for to do an allowance of using the enter key
+            }
+        });
+        //any time we change the value of the text fields, update the action handler so it has the proper data
         labels.getChildren().add(howmanylabel);
         labels.getChildren().add(sideslabel);//add the labels to their vbox
         inputs.getChildren().add(diceToRoll);
@@ -77,6 +98,15 @@ public class showCorrectInputHandler implements EventHandler<ActionEvent>
         Text diceinputlabel = new Text("Input your roll in standard format");
         Button btRoll = new Button("Roll those dice my dude!");//make the button to roll the dice
         TextField oneLineDiceText = new TextField();
+        oneLineDiceText.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> obs, String previous, String newThing) {
+            	btRoll.setOnAction(new oneLineRollHandler(oneLineDiceText.getText()));//wire the button for clickies
+                oneLineDiceText.setOnKeyPressed(new rollhandlerKey(oneLineDiceText.getText(),Utility.ONE_LINE_PLACEHOLDER));
+                btRoll.setOnKeyPressed(new rollhandlerKey(oneLineDiceText.getText(),Utility.ONE_LINE_PLACEHOLDER));//wire all the focusable things for to do an allowance of using the enter key
+            }
+        });
+        //any time the text changes, update the handlers to have the right data
         labels.getChildren().add(diceinputlabel);
         inputs.getChildren().add(oneLineDiceText);//add the input text boxes to their vbox (which is separate from the labels for alignment purposes
         wrapbois.getChildren().add(labels);
