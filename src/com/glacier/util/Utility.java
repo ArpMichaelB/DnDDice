@@ -1,5 +1,9 @@
 package com.glacier.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -80,5 +84,61 @@ public class Utility {
     public static String getCurrentTimestamp()
     {
     	return DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now());
+    }
+    
+    /**
+     * Sets the system.err output to a file, so if something new goes wrong, (i.e. the program crashes) the user can email me a log, and find out why!
+     */
+    public static void setupFileError()
+    {
+    	try {
+			String baseDrive = File.listRoots()[0].getPath();
+			File logFolder = new File("Glacier Nester/logs");
+			File file = null;
+			if (!logFolder.exists()) {
+				logFolder.setWritable(true);
+				if (logFolder.mkdirs()) {
+					file = new File("Glacier Nester/logs/DiceErrors.log");
+				}
+			} else {
+				file = new File("Glacier Nester/logs/DiceErrors.log");
+			}
+			FileOutputStream fos = new FileOutputStream(file);
+
+			PrintStream ps = new PrintStream(fos);
+			System.setErr(ps);
+			System.err.println("Started DND Dice at "
+					+ Utility.getCurrentTimestamp());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    /**
+     * Sets the system.err output to a file, so if something new goes wrong, (i.e. the program crashes) the user can email me a log, and find out why!
+     */
+    public static void setupFileOut()
+    {
+    	try {
+			String baseDrive = File.listRoots()[0].getPath();
+			File logFolder = new File("Glacier Nester/logs");
+			File file = null;
+			if (!logFolder.exists()) {
+				logFolder.setWritable(true);
+				if (logFolder.mkdirs()) {
+					file = new File("Glacier Nester/logs/Dice.log");
+				}
+			} else {
+				file = new File("Glacier Nester/logs/Dice.log");
+			}
+			FileOutputStream fos = new FileOutputStream(file);
+
+			PrintStream ps = new PrintStream(fos);
+			System.setOut(ps);
+			System.err.println("Started DND Dice at "
+					+ Utility.getCurrentTimestamp());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
     }
 }
