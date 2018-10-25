@@ -1,5 +1,6 @@
 package com.glacier.handlers;
 
+import com.glacier.exceptions.NegativeDiceException;
 import com.glacier.util.Utility;
 
 import javafx.event.ActionEvent;
@@ -36,7 +37,7 @@ class oneLineRollHandler implements EventHandler<ActionEvent>
             bonus = dicedeets[2];
             if (numdice<=0 || numface <=0)
             {
-                throw new NumberFormatException(Utility.NEGATIVE_DICE_ERROR + Utility.getCurrentTimestamp());
+                throw new NegativeDiceException(Utility.NEGATIVE_DICE_ERROR + Utility.getCurrentTimestamp());
             }
             //get the number of dice being rolled and the number of faces each die has
             for(int i = 0; i <numdice; i++)
@@ -70,10 +71,17 @@ class oneLineRollHandler implements EventHandler<ActionEvent>
         }
         catch(NumberFormatException e)
         {
+        	rollStage.close();
+        	if(e instanceof NegativeDiceException)
+        	{
+        		results.setText(e.getMessage());
+        	}
+        	else
+        	{
+        		results.setText("Seems like " + e.getMessage().substring(e.getMessage().indexOf("\"")+1, e.getMessage().lastIndexOf("\"")) + " isn't a number. Try again?");
+        	}
         	//TODO: File Based Logging
-            rollStage.close();
             //if one of the numbers was not a number, tell the user they goofed.
-            results.setText(e.getMessage());
             Scene rollScene = new Scene(aech,Utility.MENU_SIZE,Utility.MENU_SIZE_TWO);
             rollStage.setScene(rollScene);
             rollStage.show();
