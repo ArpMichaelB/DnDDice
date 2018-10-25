@@ -35,6 +35,7 @@ public class showCorrectInputHandler implements EventHandler<ActionEvent>
             Scene primscene = setupOneLineHandler();
             oneLineStage.setScene(primscene);//make the scene and set it to a window
             oneLineStage.show();//show the menu window
+            //TODO: Close the current window
         }
         else if(multiLineStatus)
         {
@@ -42,6 +43,7 @@ public class showCorrectInputHandler implements EventHandler<ActionEvent>
             Scene primscene = setupMultiLineHandler();
             multiLineStage.setScene(primscene);//make the scene and set it to a window
             multiLineStage.show();//show the menu window
+            //TODO: close the current window
         }
     }
 

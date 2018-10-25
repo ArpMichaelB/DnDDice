@@ -36,7 +36,7 @@ class oneLineRollHandler implements EventHandler<ActionEvent>
             bonus = dicedeets[2];
             if (numdice<=0 || numface <=0)
             {
-                throw new NumberFormatException();
+                throw new NumberFormatException(Utility.NEGATIVE_DICE_ERROR + Utility.getCurrentTimestamp());
             }
             //get the number of dice being rolled and the number of faces each die has
             for(int i = 0; i <numdice; i++)
@@ -70,9 +70,10 @@ class oneLineRollHandler implements EventHandler<ActionEvent>
         }
         catch(NumberFormatException e)
         {
+        	//TODO: File Based Logging
             rollStage.close();
             //if one of the numbers was not a number, tell the user they goofed.
-            results.setText("one of those \"numbers\" isn't a number that's on dice. why do you gotta.");
+            results.setText(e.getMessage());
             Scene rollScene = new Scene(aech,Utility.MENU_SIZE,Utility.MENU_SIZE_TWO);
             rollStage.setScene(rollScene);
             rollStage.show();

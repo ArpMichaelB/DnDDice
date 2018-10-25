@@ -1,12 +1,15 @@
 package com.glacier.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Utility {
 	public static int RESULTS_SIZE = 250;
     public static int RESULTS_SIZE_TWO = 400;//the size of the results screen
     public static int MENU_SIZE = 600;
     public static int MENU_SIZE_TWO = 105;//the size of the menu
     public static String ONE_LINE_PLACEHOLDER = "Only one line currently is in use, so keep that in mind, please";//a placeholder value for the rollhandlerKey, which I've made excessively verbose for safety
-    
+    public static String NEGATIVE_DICE_ERROR = "The user tried to roll negative dice at ";//What we show when the dice are negative, since that's a bad
     /**
      * because I'm too lazy to type math.random and remember how to get what I want out of it
      * @param min the smallest number you want from the function
@@ -32,6 +35,7 @@ public class Utility {
 		return temp;
 	}
     
+    
     /**
      * Based upon what this method has been handed, return a set of 3 numbers
      * @return an array of three numbers: the number of dice, number of faces, and bonus. Bonus is 0 if not applicable.
@@ -45,7 +49,7 @@ public class Utility {
         String bonus = "";
         if(!input.contains("d") && !input.contains("D"))
         {
-        	throw new NumberFormatException("Error in dice formatting");
+        	throw new NumberFormatException("Error in One Line Dice Formatting at " + getCurrentTimestamp());
         }
         input = input.toLowerCase();
         String[] diceDetails = input.split("d");
@@ -67,5 +71,14 @@ public class Utility {
             ret[2] = Integer.parseInt(bonus);
         }
         return ret;
+    }
+    
+    /**
+     * Gets the current timestamp for the purposes of logging errors.
+     * @return the current time, in format mm/dd/yyyy hh:mm:ss
+     */
+    public static String getCurrentTimestamp()
+    {
+    	return DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now());
     }
 }
