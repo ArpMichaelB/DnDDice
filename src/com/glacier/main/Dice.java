@@ -40,14 +40,14 @@ public class Dice extends Application{
         new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
-                btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected()));
+                btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected(),primaryStage));
             }
         });
         multiLine.selectedProperty().addListener(
         new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
-                btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected()));
+                btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected(),primaryStage));
             }
         });
         //any time we change the selected type, update the action for the choose button to reflect that change
@@ -57,7 +57,7 @@ public class Dice extends Application{
         radioButtons.getChildren().add(multiLine);
         wrapThings.getChildren().add(radioButtons);
         wrapThings.getChildren().add(btChoose);
-        btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected()));
+        btChoose.setOnAction(new showCorrectInputHandler(oneLine.isSelected(),multiLine.isSelected(),primaryStage));
         Scene primaryScene = new Scene(wrapThings,Utility.MENU_SIZE,Utility.MENU_SIZE_TWO);
         primaryStage.setScene(primaryScene);
         primaryStage.show();
