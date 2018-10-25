@@ -6,6 +6,8 @@ import com.glacier.util.Utility;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -23,7 +25,14 @@ class oneLineRollHandler implements EventHandler<ActionEvent>
         Stage rollStage = new Stage();
     	HBox aech = new HBox();
         Text results = new Text("yoooo");
-        aech.getChildren().add(results);
+        ScrollPane scrolledBar = new ScrollPane();
+        scrolledBar.setContent(results);
+        aech.getChildren().add(scrolledBar);
+        scrolledBar.setHbarPolicy(ScrollBarPolicy.NEVER);
+        scrolledBar.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+        scrolledBar.setMinHeight(Utility.RESULTS_SIZE_TWO);
+        scrolledBar.setMinWidth(Utility.RESULTS_SIZE);
+        //instead of adding results directly, we just add the scrolled bar thing
         String numberHolder = "You Rolled:\n";
         int numdice = 0;
         int numface = 0;
