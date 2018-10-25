@@ -84,16 +84,17 @@ class oneLineRollHandler implements EventHandler<ActionEvent>
         	if(e instanceof NegativeDiceException)
         	{
         		results.setText(e.getMessage());
+        		System.err.println(e.getMessage());
         	}
         	else
         	{
         		results.setText("Seems like " + e.getMessage().substring(e.getMessage().indexOf("\"")+1, e.getMessage().lastIndexOf("\"")) + " isn't a number. Try again?");
         	}
-        	//TODO: File Based Logging
             //if one of the numbers was not a number, tell the user they goofed.
             Scene rollScene = new Scene(aech,Utility.MENU_SIZE,Utility.MENU_SIZE_TWO);
             rollStage.setScene(rollScene);
             rollStage.show();
+            e.printStackTrace();
         }
     }
 }

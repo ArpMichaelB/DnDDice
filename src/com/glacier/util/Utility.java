@@ -110,7 +110,6 @@ public class Utility {
 			System.err.println("Started DND Dice at "
 					+ Utility.getCurrentTimestamp());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
