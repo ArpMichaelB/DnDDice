@@ -92,16 +92,20 @@ public class Utility {
     public static void setupFileError()
     {
     	try {
-			String baseDrive = File.listRoots()[0].getPath();
-			File logFolder = new File("Glacier Nester/logs");
+    		String baseDrive = File.listRoots()[0].getPath();
+			File logFolder = new File(baseDrive + "/Glacier Nester/logs/");
 			File file = null;
-			if (!logFolder.exists()) {
+			if (!logFolder.exists()) 
+			{
 				logFolder.setWritable(true);
-				if (logFolder.mkdirs()) {
-					file = new File("Glacier Nester/logs/DiceErrors.log");
+				if (logFolder.mkdirs()) 
+				{
+					file = new File(logFolder.getAbsolutePath()+"/DiceErrors.log");
 				}
-			} else {
-				file = new File("Glacier Nester/logs/DiceErrors.log");
+			} 
+			else 
+			{
+				file = new File(logFolder.getAbsolutePath()+"/DiceErrors.log");
 			}
 			FileOutputStream fos = new FileOutputStream(file);
 
@@ -109,7 +113,10 @@ public class Utility {
 			System.setErr(ps);
 			System.err.println("Started DND Dice at "
 					+ Utility.getCurrentTimestamp());
-		} catch (FileNotFoundException e) {
+		}
+    	catch (FileNotFoundException e)
+    	{
+    		System.err.println("File error in error log setup, yike");
 			e.printStackTrace();
 		}
     }
@@ -119,24 +126,30 @@ public class Utility {
     public static void setupFileOut()
     {
     	try {
-			String baseDrive = File.listRoots()[0].getPath();
-			File logFolder = new File("Glacier Nester/logs");
+    		String baseDrive = File.listRoots()[0].getPath();
+			File logFolder = new File(baseDrive + "/Glacier Nester/logs/");
 			File file = null;
-			if (!logFolder.exists()) {
+			if (!logFolder.exists()) 
+			{
 				logFolder.setWritable(true);
-				if (logFolder.mkdirs()) {
-					file = new File("Glacier Nester/logs/Dice.log");
+				if (logFolder.mkdirs()) 
+				{
+					file = new File(logFolder.getAbsolutePath()+"/Dice.log");
 				}
-			} else {
-				file = new File("Glacier Nester/logs/Dice.log");
+			} 
+			else 
+			{
+				file = new File(logFolder.getAbsolutePath()+"/Dice.log");
 			}
 			FileOutputStream fos = new FileOutputStream(file);
 
 			PrintStream ps = new PrintStream(fos);
 			System.setOut(ps);
-			System.err.println("Started DND Dice at "
+			System.out.println("Started DND Dice at "
 					+ Utility.getCurrentTimestamp());
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e)
+    	{
+			System.err.println("File error in output log setup, yike");
 			e.printStackTrace();
 		}
     }
