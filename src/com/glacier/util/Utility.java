@@ -14,6 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -168,7 +169,6 @@ public class Utility {
     }
 
 	public static Scene getResult(int[] dicedeets,String oneLineDiceText) {
-		//TODO: add responsive code for all imaged dice except 4, and handle this being called from multiline (i.e. sense when dicedeets[2] is null)
 		VBox imageHolder = new VBox();
 		Text results = new Text("yoooo");
         ScrollPane scrolledBar = new ScrollPane();
@@ -200,7 +200,6 @@ public class Utility {
 	        //however many dice are being rolled, pick a number between 1 and the number of faces each die has at random
 	        //i.e. roll the dice
 	        //then add the number to a holder
-	        //may change this later to instead add an image of the die face corresponding with the number rolled to the scene
 	        numberHolder+="Your total is: ";
 	        if(oneLineDiceText.contains("-"))
 	        {
@@ -308,7 +307,8 @@ public class Utility {
 	            		imgV.setImage(new Image(new File(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	}
-	            }
+	            }//for some reason this last option is necessary, i seem to have hecked up
+	            //oh well, so it'll pick option one a bit more often, nbd
 	            imageHolder.getChildren().add(imgV);
 	            total+=temp;
 	        }
@@ -334,8 +334,6 @@ public class Utility {
         {
         	for(int i = 0; i <numdice; i++)
 	        {
-        		//turns out this didn't work because i didn't include the filetype at the end of my paths
-        		//I am a WHOLE dingus
         		ImageView imgV = new ImageView();
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
@@ -374,8 +372,6 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	//I know this is surpremely redundant
-	        	//but I don't want that else if to be hanging
 	        	total=total;
 	        }
         	results.setText("Your total is: " + total);
@@ -385,8 +381,6 @@ public class Utility {
         {
         	for(int i = 0; i <numdice; i++)
 	        {
-        		//turns out this didn't work because i didn't include the filetype at the end of my paths
-        		//I am a WHOLE dingus
         		ImageView imgV = new ImageView();
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
@@ -431,8 +425,6 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	//I know this is surpremely redundant
-	        	//but I don't want that else if to be hanging
 	        	total=total;
 	        }
         	results.setText("Your total is: " + total);
@@ -442,8 +434,6 @@ public class Utility {
         {
         	for(int i = 0; i <numdice; i++)
 	        {
-        		//turns out this didn't work because i didn't include the filetype at the end of my paths
-        		//I am a WHOLE dingus
         		ImageView imgV = new ImageView();
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
@@ -494,8 +484,6 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	//I know this is surpremely redundant
-	        	//but I don't want that else if to be hanging
 	        	total=total;
 	        }
         	results.setText("Your total is: " + total);
@@ -505,8 +493,6 @@ public class Utility {
         {
         	for(int i = 0; i <numdice; i++)
 	        {
-        		//turns out this didn't work because i didn't include the filetype at the end of my paths
-        		//I am a WHOLE dingus
         		ImageView imgV = new ImageView();
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
@@ -563,8 +549,6 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	//I know this is surpremely redundant
-	        	//but I don't want that else if to be hanging
 	        	total=total;
 	        }
         	results.setText("Your total is: " + total);
@@ -574,8 +558,6 @@ public class Utility {
         {
         	for(int i = 0; i <numdice; i++)
 	        {
-        		//turns out this didn't work because i didn't include the filetype at the end of my paths
-        		//I am a WHOLE dingus
         		ImageView imgV = new ImageView();
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
@@ -656,15 +638,120 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	//I know this is surpremely redundant
-	        	//but I don't want that else if to be hanging
 	        	total=total;
 	        }
         	results.setText("Your total is: " + total);
         	imageHolder.getChildren().add(results);
         }
         //if it's a d6, d8, d10, d12, or d20, show the corresponding image
-        
+        else if(numface == 100)
+        {
+        	for(int i = 0; i<numdice;i++)
+        	{
+        		HBox aech = new HBox();
+        		ImageView imgV = new ImageView();
+        		imgV.setFitWidth(100);
+        		imgV.setFitHeight(100);
+	            ImageView imgVTwo = new ImageView();
+	            imgVTwo.setFitHeight(100);
+	            imgVTwo.setFitWidth(100);
+        		int temp = Utility.rand(1,numface);
+        		if(temp == 100)
+        		{
+        			imgV.setImage(new Image(new File(HundredsPlace.ZERO.toString()).toURI().toString()));
+        			imgVTwo.setImage(new Image(new File(TenSided.ONE.toString()).toURI().toString()));
+        		}
+        		else
+        		{
+		            //since we know integer division truncates, we can just divide temp by 10 to get the first half of the percentile
+	        		switch(temp/10)
+		            {
+	        		case 0:
+	        			imgV.setImage(new Image(new File(HundredsPlace.ZERO.toString()).toURI().toString()));
+	        			break;
+	        		case 1:
+	        			imgV.setImage(new Image(new File(HundredsPlace.TEN.toString()).toURI().toString()));
+	        			break;
+	        		case 2:
+	        			imgV.setImage(new Image(new File(HundredsPlace.TWENTY.toString()).toURI().toString()));
+	        			break;
+	        		case 3:
+	        			imgV.setImage(new Image(new File(HundredsPlace.THIRTY.toString()).toURI().toString()));
+	        			break;
+	        		case 4:
+	        			imgV.setImage(new Image(new File(HundredsPlace.FORTY.toString()).toURI().toString()));
+	        			break;
+	        		case 5:
+	        			imgV.setImage(new Image(new File(HundredsPlace.FIFTY.toString()).toURI().toString()));
+	        			break;
+	        		case 6:
+	        			imgV.setImage(new Image(new File(HundredsPlace.SIXTY.toString()).toURI().toString()));
+	        			break;
+	        		case 7:
+	        			imgV.setImage(new Image(new File(HundredsPlace.SEVENTY.toString()).toURI().toString()));
+	        			break;
+	        		case 8:
+	        			imgV.setImage(new Image(new File(HundredsPlace.EIGHTY.toString()).toURI().toString()));
+	        			break;
+	        		case 9:
+	        			imgV.setImage(new Image(new File(HundredsPlace.NINETY.toString()).toURI().toString()));
+	        			break;
+		            }
+	        		switch(temp%10)
+	        		{
+	        		case 0:
+	        			imgVTwo.setImage(new Image(new File(TenSided.ONE.toString()).toURI().toString()));
+	        			break;
+	        		case 1:
+	        			imgVTwo.setImage(new Image(new File(TenSided.TWO.toString()).toURI().toString()));
+	        			break;
+	        		case 2:
+	        			imgVTwo.setImage(new Image(new File(TenSided.THREE.toString()).toURI().toString()));
+	        			break;
+	        		case 3:
+	        			imgVTwo.setImage(new Image(new File(TenSided.FOUR.toString()).toURI().toString()));
+	        			break;
+	        		case 4:
+	        			imgVTwo.setImage(new Image(new File(TenSided.FIVE.toString()).toURI().toString()));
+	        			break;
+	        		case 5:
+	        			imgVTwo.setImage(new Image(new File(TenSided.SIX.toString()).toURI().toString()));
+	        			break;
+	        		case 6:
+	        			imgVTwo.setImage(new Image(new File(TenSided.SEVEN.toString()).toURI().toString()));
+	        			break;
+	        		case 7:
+	        			imgVTwo.setImage(new Image(new File(TenSided.EIGHT.toString()).toURI().toString()));
+	        			break;
+	        		case 8:
+	        			imgVTwo.setImage(new Image(new File(TenSided.NINE.toString()).toURI().toString()));
+	        			break;
+	        		case 9:
+	        			imgVTwo.setImage(new Image(new File(TenSided.TEN.toString()).toURI().toString()));
+	        			break;
+	        		}
+        		}
+        		aech.getChildren().addAll(imgV,imgVTwo);
+	            imageHolder.getChildren().add(aech);
+        		total+=temp;
+	            aech = new HBox();
+	            imgV = new ImageView();
+	            imgVTwo = new ImageView();
+        	}
+        	if(oneLineDiceText.contains("-"))
+	        {
+	            total-=bonus;
+	        }
+	        else if(oneLineDiceText.contains("+"))
+	        {
+	            total+=bonus;
+	        }
+	        else
+	        {
+	        	total=total;
+	        }
+        	imageHolder.getChildren().add(new Text("Your total is: " + total));
+        }
         //if it's a d100, show the two corresponding d10s
         return new Scene(scrolledBar,Utility.RESULTS_SIZE,Utility.RESULTS_SIZE_TWO);
 	}

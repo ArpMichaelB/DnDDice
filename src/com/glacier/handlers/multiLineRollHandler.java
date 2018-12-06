@@ -49,17 +49,7 @@ class multiLineRollHandler implements EventHandler<ActionEvent>
                 throw new NegativeDiceException(Utility.NEGATIVE_DICE_ERROR + Utility.getCurrentTimestamp());
             }
             //get the number of dice being rolled and the number of faces each die has
-            for(int i = 0; i <numdice; i++)
-            {
-                int temp = Utility.rand(1,numface);
-                numberHolder += temp;
-                numberHolder += "\n";
-            }
-            //however many dice are being rolled, pick a number between 1 and the number of faces each die has at random
-            //i.e. roll the dice
-            //then add the number to a holder
-            results.setText(numberHolder);//make the results text part of the display 
-            Scene rollScene = new Scene(aech,Utility.RESULTS_SIZE,Utility.RESULTS_SIZE_TWO);
+            Scene rollScene = Utility.getResult(dicedeets, Utility.ONE_LINE_PLACEHOLDER);
             rollStage.setScene(rollScene);//set the scene of the roll display to be the one containing the results
             rollStage.show();//show the results
         }
