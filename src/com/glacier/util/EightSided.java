@@ -2,14 +2,14 @@ package com.glacier.util;
 
 public enum EightSided {
 
-	ONE("C:/Users/Michael/Pictures/dice photos/1d8 1 waifu.png"),
-	TWO("C:/Users/Michael/Pictures/dice photos/1d8 2 waifu.png"),
-	THREE("C:/Users/Michael/Pictures/dice photos/1d8 3 waifu.png"),
-	FOUR("C:/Users/Michael/Pictures/dice photos/1d8 4 waifu.png"),
-	FIVE("C:/Users/Michael/Pictures/dice photos/1d8 5 waifu.png"),
-	SIX("C:/Users/Michael/Pictures/dice photos/1d8 6 waifu.png"),
-	SEVEN("C:/Users/Michael/Pictures/dice photos/1d8 7 waifu.png"),
-	EIGHT("C:/Users/Michael/Pictures/dice photos/1d8 8 waifu.png");
+	ONE("src/resources/1d8 1.png"),
+	TWO("src/resources/1d8 2.png"),
+	THREE("src/resources/1d8 3.png"),
+	FOUR("src/resources/1d8 4.png"),
+	FIVE("src/resources/1d8 5.png"),
+	SIX("src/resources/1d8 6.png"),
+	SEVEN("src/resources/1d8 7.png"),
+	EIGHT("src/resources/1d8 8.png");
 	
 	private String filename;
 	

@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class Utility {
-	public static int RESULTS_SIZE = 150;
+	public static int RESULTS_SIZE = 250;
     public static int RESULTS_SIZE_TWO = 400;//the size of the results screen
     public static int MENU_SIZE = 600;
     public static int MENU_SIZE_TWO = 105;//the size of the menu

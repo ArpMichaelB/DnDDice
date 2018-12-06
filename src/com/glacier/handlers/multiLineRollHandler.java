@@ -36,7 +36,6 @@ class multiLineRollHandler implements EventHandler<ActionEvent>
         scrolledBar.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrolledBar.setMinHeight(Utility.RESULTS_SIZE_TWO);
         scrolledBar.setMinWidth(Utility.RESULTS_SIZE);
-        String numberHolder = "You Rolled:\n";
         int numdice = 0;
         int numface = 0;
         try{

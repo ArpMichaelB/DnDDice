@@ -1,16 +1,16 @@
 package com.glacier.util;
 
 public enum HundredsPlace {
-	ZERO("C:/Users/Michael/Pictures/dice photos/1d100 00 waifu.png"),
-	TEN("C:/Users/Michael/Pictures/dice photos/1d100 10 waifu.png"),
-	TWENTY("C:/Users/Michael/Pictures/dice photos/1d100 20 waifu.png"),
-	THIRTY("C:/Users/Michael/Pictures/dice photos/1d100 30 waifu.png"),
-	FORTY("C:/Users/Michael/Pictures/dice photos/1d100 40 waifu.png"),
-	FIFTY("C:/Users/Michael/Pictures/dice photos/1d100 50 waifu.png"),
-	SIXTY("C:/Users/Michael/Pictures/dice photos/1d100 60 waifu.png"),
-	SEVENTY("C:/Users/Michael/Pictures/dice photos/1d100 70 waifu.png"),
-	EIGHTY("C:/Users/Michael/Pictures/dice photos/1d100 80 waifu.png"),
-	NINETY("C:/Users/Michael/Pictures/dice photos/1d100 90 waifu.png");
+	ZERO("src/resources/1d100 00.png"),
+	TEN("src/resources/1d100 10.png"),
+	TWENTY("src/resources/1d100 20.png"),
+	THIRTY("src/resources/1d100 30.png"),
+	FORTY("src/resources/1d100 40.png"),
+	FIFTY("src/resources/1d100 50.png"),
+	SIXTY("src/resources/1d100 60.png"),
+	SEVENTY("src/resources/1d100 70.png"),
+	EIGHTY("src/resources/1d100 80.png"),
+	NINETY("src/resources/1d100 90.png");
 	
 	String filename;
 	

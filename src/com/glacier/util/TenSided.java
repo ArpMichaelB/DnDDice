@@ -1,16 +1,16 @@
 package com.glacier.util;
 
 public enum TenSided {
-	ONE("C:/Users/Michael/Pictures/dice photos/1d10 1 waifu.png"),
-	TWO("C:/Users/Michael/Pictures/dice photos/1d10 2 waifu.png"),
-	THREE("C:/Users/Michael/Pictures/dice photos/1d10 3 waifu.png"),
-	FOUR("C:/Users/Michael/Pictures/dice photos/1d10 4 waifu.png"),
-	FIVE("C:/Users/Michael/Pictures/dice photos/1d10 5 waifu.png"),
-	SIX("C:/Users/Michael/Pictures/dice photos/1d10 6 waifu.png"),
-	SEVEN("C:/Users/Michael/Pictures/dice photos/1d10 7 waifu.png"),
-	EIGHT("C:/Users/Michael/Pictures/dice photos/1d10 8 waifu.png"),
-	NINE("C:/Users/Michael/Pictures/dice photos/1d10 9 waifu.png"),
-	TEN("C:/Users/Michael/Pictures/dice photos/1d10 10 waifu.png");
+	ONE("src/resources/1d10 1.png"),
+	TWO("src/resources/1d10 2.png"),
+	THREE("src/resources/1d10 3.png"),
+	FOUR("src/resources/1d10 4.png"),
+	FIVE("src/resources/1d10 5.png"),
+	SIX("src/resources/1d10 6.png"),
+	SEVEN("src/resources/1d10 7.png"),
+	EIGHT("src/resources/1d10 8.png"),
+	NINE("src/resources/1d10 9.png"),
+	TEN("src/resources/1d10 10.png");
 	
 	private String filename;
 	

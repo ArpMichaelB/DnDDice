@@ -1,26 +1,26 @@
 package com.glacier.util;
 
 public enum TwentySided {
-	ONE("C:/Users/Michael/Pictures/dice photos/1d20 1 waifu.png"),
-	TWO("C:/Users/Michael/Pictures/dice photos/1d20 2 waifu.png"),
-	THREE("C:/Users/Michael/Pictures/dice photos/1d20 3 waifu.png"),
-	FOUR("C:/Users/Michael/Pictures/dice photos/1d20 4 waifu.png"),
-	FIVE("C:/Users/Michael/Pictures/dice photos/1d20 5 waifu.png"),
-	SIX("C:/Users/Michael/Pictures/dice photos/1d20 6 waifu.png"),
-	SEVEN("C:/Users/Michael/Pictures/dice photos/1d20 7 waifu.png"),
-	EIGHT("C:/Users/Michael/Pictures/dice photos/1d20 8 waifu.png"),
-	NINE("C:/Users/Michael/Pictures/dice photos/1d20 9 waifu.png"),
-	TEN("C:/Users/Michael/Pictures/dice photos/1d20 10 waifu.png"),
-	ELEVEN("C:/Users/Michael/Pictures/dice photos/1d20 11 waifu.png"),
-	TWELVE("C:/Users/Michael/Pictures/dice photos/1d20 12 waifu.png"),
-	THIRTEEN("C:/Users/Michael/Pictures/dice photos/1d20 13 waifu.png"),
-	FOURTEEN("C:/Users/Michael/Pictures/dice photos/1d20 14 waifu.png"),
-	FIFTEEN("C:/Users/Michael/Pictures/dice photos/1d20 15 waifu.png"),
-	SIXTEEN("C:/Users/Michael/Pictures/dice photos/1d20 16 waifu.png"),
-	SEVENTEEN("C:/Users/Michael/Pictures/dice photos/1d20 17 waifu.png"),
-	EIGHTEEN("C:/Users/Michael/Pictures/dice photos/1d20 18 waifu.png"),
-	NINETEEN("C:/Users/Michael/Pictures/dice photos/1d20 19 waifu.png"),
-	TWENTY("C:/Users/Michael/Pictures/dice photos/1d20 20 waifu.png");
+	ONE("src/resources/1d20 1.png"),
+	TWO("src/resources/1d20 2.png"),
+	THREE("src/resources/1d20 3.png"),
+	FOUR("src/resources/1d20 4.png"),
+	FIVE("src/resources/1d20 5.png"),
+	SIX("src/resources/1d20 6.png"),
+	SEVEN("src/resources/1d20 7.png"),
+	EIGHT("src/resources/1d20 8.png"),
+	NINE("src/resources/1d20 9.png"),
+	TEN("src/resources/1d20 10.png"),
+	ELEVEN("src/resources/1d20 11.png"),
+	TWELVE("src/resources/1d20 12.png"),
+	THIRTEEN("src/resources/1d20 13.png"),
+	FOURTEEN("src/resources/1d20 14.png"),
+	FIFTEEN("src/resources/1d20 15.png"),
+	SIXTEEN("src/resources/1d20 16.png"),
+	SEVENTEEN("src/resources/1d20 17.png"),
+	EIGHTEEN("src/resources/1d20 18.png"),
+	NINETEEN("src/resources/1d20 19.png"),
+	TWENTY("src/resources/1d20 20.png");
 	
 	private String filename;
 	

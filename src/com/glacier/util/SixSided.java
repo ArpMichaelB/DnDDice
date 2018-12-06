@@ -1,12 +1,12 @@
 package com.glacier.util;
 
 public enum SixSided {
-	ONE("C:/Users/Michael/Pictures/dice photos/1d6 1 waifu.png"),
-	TWO("C:/Users/Michael/Pictures/dice photos/1d6 2 waifu.png"),
-	THREE("C:/Users/Michael/Pictures/dice photos/1d6 3 waifu.png"),
-	FOUR("C:/Users/Michael/Pictures/dice photos/1d6 4 waifu.png"),
-	FIVE("C:/Users/Michael/Pictures/dice photos/1d6 5 waifu.png"),
-	SIX("C:/Users/Michael/Pictures/dice photos/1d6 6 waifu.png");
+	ONE("src/resources/1d6 1.png"),
+	TWO("src/resources/1d6 2.png"),
+	THREE("src/resources/1d6 3.png"),
+	FOUR("src/resources/1d6 4.png"),
+	FIVE("src/resources/1d6 5.png"),
+	SIX("src/resources/1d6 6.png");
 	
 	private String filename;
 	
