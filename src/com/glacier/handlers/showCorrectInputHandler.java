@@ -31,6 +31,7 @@ public class showCorrectInputHandler implements EventHandler<ActionEvent>
     @Override
     public void handle(ActionEvent event) 
     {
+    	//TODO: use java 7 Random and seed it every time the dice roll
         if(oneLineStatus)
         {
         	Stage oneLineStage = new Stage();
