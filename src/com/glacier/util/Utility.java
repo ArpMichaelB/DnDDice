@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -168,7 +169,7 @@ public class Utility {
 		}
     }
 
-	public static Scene getResult(int[] dicedeets,String oneLineDiceText) {
+	public static Scene getResult(int[] dicedeets,String oneLineDiceText) throws URISyntaxException{
 		VBox imageHolder = new VBox();
 		Text results = new Text("yoooo");
         ScrollPane scrolledBar = new ScrollPane();
@@ -221,8 +222,6 @@ public class Utility {
         {
         	for(int i = 0; i <numdice; i++)
 	        {
-        		//turns out this didn't work because i didn't include the filetype at the end of my paths
-        		//I am a WHOLE dingus
         		ImageView imgV = new ImageView();
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
@@ -233,20 +232,18 @@ public class Utility {
 	            	switch(temp)
 	            	{
 	            	case 1:
-	            		imgV.setImage(new Image(new File(FourSided.ONE_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.ONE_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 2:
-	            		imgV.setImage(new Image(new File(FourSided.TWO_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.TWO_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 3: 
-	            		imgV.setImage(new Image(new File(FourSided.THREE_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.THREE_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 4:
-	            		imgV.setImage(new Image(new File(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	}
-	            	//this is a whole mess
-	            	//but what it says is, add the image corresponding to the rolled number, option 1, to the vbox
 	            }
 	            //if option 2
 	            else if(Utility.rand(1,3) == 2)
@@ -254,20 +251,18 @@ public class Utility {
 	            	switch(temp)
 	            	{
 	            	case 1:
-	            		imgV.setImage(new Image(new File(FourSided.ONE_OPTION_TWO.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.ONE_OPTION_TWO.toString()).toURI().toString()));
 	            		break;
 	            	case 2:
-	            		imgV.setImage(new Image(new File(FourSided.TWO_OPTION_TWO.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.TWO_OPTION_TWO.toString()).toURI().toString()));
 	            		break;
 	            	case 3: 
-	            		imgV.setImage(new Image(new File(FourSided.THREE_OPTION_TWO.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.THREE_OPTION_TWO.toString()).toURI().toString()));
 	            		break;
 	            	case 4:
-	            		imgV.setImage(new Image(new File(FourSided.FOUR_OPTION_TWO.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_TWO.toString()).toURI().toString()));
 	            		break;
 	            	}
-	            	//this is a whole mess
-	            	//but what it says is, add the image corresponding to the rolled number, option 2, to the vbox
 	            }
 	            //if option 3
 	            else if(Utility.rand(1,3) == 3)
@@ -275,39 +270,38 @@ public class Utility {
 	            	switch(temp)
 	            	{
 	            	case 1:
-	            		imgV.setImage(new Image(new File(FourSided.ONE_OPTION_THREE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.ONE_OPTION_THREE.toString()).toURI().toString()));
 	            		break;
 	            	case 2:
-	            		imgV.setImage(new Image(new File(FourSided.TWO_OPTION_THREE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.TWO_OPTION_THREE.toString()).toURI().toString()));
 	            		break;
 	            	case 3: 
-	            		imgV.setImage(new Image(new File(FourSided.THREE_OPTION_THREE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.THREE_OPTION_THREE.toString()).toURI().toString()));
 	            		break;
 	            	case 4:
-	            		imgV.setImage(new Image(new File(FourSided.FOUR_OPTION_THREE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_THREE.toString()).toURI().toString()));
 	            		break;
 	            	}
-	            	//this is a whole mess
-	            	//but what it says is, add the image corresponding to the rolled number, option 1, to the vbox
 	            }
 	            else
 	            {
 	            	switch(temp)
 	            	{
 	            	case 1:
-	            		imgV.setImage(new Image(new File(FourSided.ONE_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 2:
-	            		imgV.setImage(new Image(new File(FourSided.TWO_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 3: 
-	            		imgV.setImage(new Image(new File(FourSided.THREE_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 4:
-	            		imgV.setImage(new Image(new File(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	}
-	            }//for some reason this last option is necessary, i seem to have hecked up
+	            }
+	            //for some reason this last option is necessary, i seem to have hecked up
 	            //oh well, so it'll pick option one a bit more often, nbd
 	            imageHolder.getChildren().add(imgV);
 	            total+=temp;
@@ -324,7 +318,7 @@ public class Utility {
 	        {
 	        	//I know this is surpremely redundant
 	        	//but I don't want that else if to be hanging
-	        	total=total;
+	        	total+=0;
 	        }
         	results.setText("Your total is: " + total);
         	imageHolder.getChildren().add(results);
@@ -338,27 +332,7 @@ public class Utility {
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
 	            int temp = Utility.rand(1,numface);
-	            switch(temp)
-	            {
-	            case 1:
-	            	imgV.setImage(new Image(new File(SixSided.ONE.toString()).toURI().toString()));
-	            	break;
-	            case 2:
-	            	imgV.setImage(new Image(new File(SixSided.TWO.toString()).toURI().toString()));
-	            	break;
-	            case 3:
-	            	imgV.setImage(new Image(new File(SixSided.THREE.toString()).toURI().toString()));
-	            	break;
-	            case 4:
-	            	imgV.setImage(new Image(new File(SixSided.FOUR.toString()).toURI().toString()));
-	            	break;
-	            case 5:
-	            	imgV.setImage(new Image(new File(SixSided.FIVE.toString()).toURI().toString()));
-	            	break;
-	            case 6:
-	            	imgV.setImage(new Image(new File(SixSided.SIX.toString()).toURI().toString()));
-	            	break;
-	            }
+	            imgV.setImage(new Image(Object.class.getResource(SixSided.values()[temp-1].toString()).toURI().toString()));
 	            imageHolder.getChildren().add(imgV);
 	            total+=temp;
 	        }
@@ -372,7 +346,7 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	total=total;
+	        	total+=0;
 	        }
         	results.setText("Your total is: " + total);
         	imageHolder.getChildren().add(results);
@@ -385,33 +359,7 @@ public class Utility {
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
 	            int temp = Utility.rand(1,numface);
-	            switch(temp)
-	            {
-	            case 1:
-	            	imgV.setImage(new Image(new File(EightSided.ONE.toString()).toURI().toString()));
-	            	break;
-	            case 2:
-	            	imgV.setImage(new Image(new File(EightSided.TWO.toString()).toURI().toString()));
-	            	break;
-	            case 3:
-	            	imgV.setImage(new Image(new File(EightSided.THREE.toString()).toURI().toString()));
-	            	break;
-	            case 4:
-	            	imgV.setImage(new Image(new File(EightSided.FOUR.toString()).toURI().toString()));
-	            	break;
-	            case 5:
-	            	imgV.setImage(new Image(new File(EightSided.FIVE.toString()).toURI().toString()));
-	            	break;
-	            case 6:
-	            	imgV.setImage(new Image(new File(EightSided.SIX.toString()).toURI().toString()));
-	            	break;
-	            case 7:
-	            	imgV.setImage(new Image(new File(EightSided.SEVEN.toString()).toURI().toString()));
-	            	break;
-	            case 8:
-	            	imgV.setImage(new Image(new File(EightSided.EIGHT.toString()).toURI().toString()));
-	            	break;
-	            }
+	            imgV.setImage(new Image(Object.class.getResource(EightSided.values()[temp-1].toString()).toURI().toString()));
 	            imageHolder.getChildren().add(imgV);
 	            total+=temp;
 	        }
@@ -425,7 +373,7 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	total=total;
+	        	total+=0;
 	        }
         	results.setText("Your total is: " + total);
         	imageHolder.getChildren().add(results);
@@ -438,39 +386,7 @@ public class Utility {
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
 	            int temp = Utility.rand(1,numface);
-	            switch(temp)
-	            {
-	            case 1:
-	            	imgV.setImage(new Image(new File(TenSided.ONE.toString()).toURI().toString()));
-	            	break;
-	            case 2:
-	            	imgV.setImage(new Image(new File(TenSided.TWO.toString()).toURI().toString()));
-	            	break;
-	            case 3:
-	            	imgV.setImage(new Image(new File(TenSided.THREE.toString()).toURI().toString()));
-	            	break;
-	            case 4:
-	            	imgV.setImage(new Image(new File(TenSided.FOUR.toString()).toURI().toString()));
-	            	break;
-	            case 5:
-	            	imgV.setImage(new Image(new File(TenSided.FIVE.toString()).toURI().toString()));
-	            	break;
-	            case 6:
-	            	imgV.setImage(new Image(new File(TenSided.SIX.toString()).toURI().toString()));
-	            	break;
-	            case 7:
-	            	imgV.setImage(new Image(new File(TenSided.SEVEN.toString()).toURI().toString()));
-	            	break;
-	            case 8:
-	            	imgV.setImage(new Image(new File(TenSided.EIGHT.toString()).toURI().toString()));
-	            	break;
-	            case 9:
-	            	imgV.setImage(new Image(new File(TenSided.NINE.toString()).toURI().toString()));
-	            	break;
-	            case 10:
-	            	imgV.setImage(new Image(new File(TenSided.TEN.toString()).toURI().toString()));
-	            	break;
-	            }
+	            imgV.setImage(new Image(Object.class.getResource(TenSided.values()[temp-1].toString()).toURI().toString()));
 	            imageHolder.getChildren().add(imgV);
 	            total+=temp;
 	        }
@@ -484,7 +400,7 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	total=total;
+	        	total+=0;
 	        }
         	results.setText("Your total is: " + total);
         	imageHolder.getChildren().add(results);
@@ -497,45 +413,7 @@ public class Utility {
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
 	            int temp = Utility.rand(1,numface);
-	            switch(temp)
-	            {
-	            case 1:
-	            	imgV.setImage(new Image(new File(TwelveSided.ONE.toString()).toURI().toString()));
-	            	break;
-	            case 2:
-	            	imgV.setImage(new Image(new File(TwelveSided.TWO.toString()).toURI().toString()));
-	            	break;
-	            case 3:
-	            	imgV.setImage(new Image(new File(TwelveSided.THREE.toString()).toURI().toString()));
-	            	break;
-	            case 4:
-	            	imgV.setImage(new Image(new File(TwelveSided.FOUR.toString()).toURI().toString()));
-	            	break;
-	            case 5:
-	            	imgV.setImage(new Image(new File(TwelveSided.FIVE.toString()).toURI().toString()));
-	            	break;
-	            case 6:
-	            	imgV.setImage(new Image(new File(TwelveSided.SIX.toString()).toURI().toString()));
-	            	break;
-	            case 7:
-	            	imgV.setImage(new Image(new File(TwelveSided.SEVEN.toString()).toURI().toString()));
-	            	break;
-	            case 8:
-	            	imgV.setImage(new Image(new File(TwelveSided.EIGHT.toString()).toURI().toString()));
-	            	break;
-	            case 9:
-	            	imgV.setImage(new Image(new File(TwelveSided.NINE.toString()).toURI().toString()));
-	            	break;
-	            case 10:
-	            	imgV.setImage(new Image(new File(TwelveSided.TEN.toString()).toURI().toString()));
-	            	break;
-	            case 11:
-	            	imgV.setImage(new Image(new File(TwelveSided.ELEVEN.toString()).toURI().toString()));
-	            	break;
-	            case 12:
-	            	imgV.setImage(new Image(new File(TwelveSided.TWELVE.toString()).toURI().toString()));
-	            	break;
-	            }
+	            imgV.setImage(new Image(Object.class.getResource(TwelveSided.values()[temp-1].toString()).toURI().toString()));
 	            imageHolder.getChildren().add(imgV);
 	            total+=temp;
 	        }
@@ -549,7 +427,7 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	total=total;
+	        	total+=0;
 	        }
         	results.setText("Your total is: " + total);
         	imageHolder.getChildren().add(results);
@@ -562,69 +440,7 @@ public class Utility {
         		imgV.setFitWidth(100);
         		imgV.setFitHeight(100);
 	            int temp = Utility.rand(1,numface);
-	            switch(temp)
-	            {
-	            case 1:
-	            	imgV.setImage(new Image(new File(TwentySided.ONE.toString()).toURI().toString()));
-	            	break;
-	            case 2:
-	            	imgV.setImage(new Image(new File(TwentySided.TWO.toString()).toURI().toString()));
-	            	break;
-	            case 3:
-	            	imgV.setImage(new Image(new File(TwentySided.THREE.toString()).toURI().toString()));
-	            	break;
-	            case 4:
-	            	imgV.setImage(new Image(new File(TwentySided.FOUR.toString()).toURI().toString()));
-	            	break;
-	            case 5:
-	            	imgV.setImage(new Image(new File(TwentySided.FIVE.toString()).toURI().toString()));
-	            	break;
-	            case 6:
-	            	imgV.setImage(new Image(new File(TwentySided.SIX.toString()).toURI().toString()));
-	            	break;
-	            case 7:
-	            	imgV.setImage(new Image(new File(TwentySided.SEVEN.toString()).toURI().toString()));
-	            	break;
-	            case 8:
-	            	imgV.setImage(new Image(new File(TwentySided.EIGHT.toString()).toURI().toString()));
-	            	break;
-	            case 9:
-	            	imgV.setImage(new Image(new File(TwentySided.NINE.toString()).toURI().toString()));
-	            	break;
-	            case 10:
-	            	imgV.setImage(new Image(new File(TwentySided.TEN.toString()).toURI().toString()));
-	            	break;
-	            case 11:
-	            	imgV.setImage(new Image(new File(TwentySided.ELEVEN.toString()).toURI().toString()));
-	            	break;
-	            case 12:
-	            	imgV.setImage(new Image(new File(TwentySided.TWELVE.toString()).toURI().toString()));
-	            	break;
-	            case 13:
-	            	imgV.setImage(new Image(new File(TwentySided.THIRTEEN.toString()).toURI().toString()));
-	            	break;
-	            case 14:
-	            	imgV.setImage(new Image(new File(TwentySided.FOURTEEN.toString()).toURI().toString()));
-	            	break;
-	            case 15:
-	            	imgV.setImage(new Image(new File(TwentySided.FIFTEEN.toString()).toURI().toString()));
-	            	break;
-	            case 16:
-	            	imgV.setImage(new Image(new File(TwentySided.SIXTEEN.toString()).toURI().toString()));
-	            	break;
-	            case 17:
-	            	imgV.setImage(new Image(new File(TwentySided.SEVENTEEN.toString()).toURI().toString()));
-	            	break;
-	            case 18:
-	            	imgV.setImage(new Image(new File(TwentySided.EIGHTEEN.toString()).toURI().toString()));
-	            	break;
-	            case 19:
-	            	imgV.setImage(new Image(new File(TwentySided.NINETEEN.toString()).toURI().toString()));
-	            	break;
-	            case 20:
-	            	imgV.setImage(new Image(new File(TwentySided.TWENTY.toString()).toURI().toString()));
-	            	break;
-	            }
+	            imgV.setImage(new Image(Object.class.getResource(TwentySided.values()[temp-1].toString()).toURI().toString()));
 	            imageHolder.getChildren().add(imgV);
 	            total+=temp;
 	        }
@@ -638,7 +454,7 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	total=total;
+	        	total+=0;
 	        }
         	results.setText("Your total is: " + total);
         	imageHolder.getChildren().add(results);
@@ -664,72 +480,8 @@ public class Utility {
         		else
         		{
 		            //since we know integer division truncates, we can just divide temp by 10 to get the first half of the percentile
-	        		switch(temp/10)
-		            {
-	        		case 0:
-	        			imgV.setImage(new Image(new File(HundredsPlace.ZERO.toString()).toURI().toString()));
-	        			break;
-	        		case 1:
-	        			imgV.setImage(new Image(new File(HundredsPlace.TEN.toString()).toURI().toString()));
-	        			break;
-	        		case 2:
-	        			imgV.setImage(new Image(new File(HundredsPlace.TWENTY.toString()).toURI().toString()));
-	        			break;
-	        		case 3:
-	        			imgV.setImage(new Image(new File(HundredsPlace.THIRTY.toString()).toURI().toString()));
-	        			break;
-	        		case 4:
-	        			imgV.setImage(new Image(new File(HundredsPlace.FORTY.toString()).toURI().toString()));
-	        			break;
-	        		case 5:
-	        			imgV.setImage(new Image(new File(HundredsPlace.FIFTY.toString()).toURI().toString()));
-	        			break;
-	        		case 6:
-	        			imgV.setImage(new Image(new File(HundredsPlace.SIXTY.toString()).toURI().toString()));
-	        			break;
-	        		case 7:
-	        			imgV.setImage(new Image(new File(HundredsPlace.SEVENTY.toString()).toURI().toString()));
-	        			break;
-	        		case 8:
-	        			imgV.setImage(new Image(new File(HundredsPlace.EIGHTY.toString()).toURI().toString()));
-	        			break;
-	        		case 9:
-	        			imgV.setImage(new Image(new File(HundredsPlace.NINETY.toString()).toURI().toString()));
-	        			break;
-		            }
-	        		switch(temp%10)
-	        		{
-	        		case 0:
-	        			imgVTwo.setImage(new Image(new File(TenSided.ONE.toString()).toURI().toString()));
-	        			break;
-	        		case 1:
-	        			imgVTwo.setImage(new Image(new File(TenSided.TWO.toString()).toURI().toString()));
-	        			break;
-	        		case 2:
-	        			imgVTwo.setImage(new Image(new File(TenSided.THREE.toString()).toURI().toString()));
-	        			break;
-	        		case 3:
-	        			imgVTwo.setImage(new Image(new File(TenSided.FOUR.toString()).toURI().toString()));
-	        			break;
-	        		case 4:
-	        			imgVTwo.setImage(new Image(new File(TenSided.FIVE.toString()).toURI().toString()));
-	        			break;
-	        		case 5:
-	        			imgVTwo.setImage(new Image(new File(TenSided.SIX.toString()).toURI().toString()));
-	        			break;
-	        		case 6:
-	        			imgVTwo.setImage(new Image(new File(TenSided.SEVEN.toString()).toURI().toString()));
-	        			break;
-	        		case 7:
-	        			imgVTwo.setImage(new Image(new File(TenSided.EIGHT.toString()).toURI().toString()));
-	        			break;
-	        		case 8:
-	        			imgVTwo.setImage(new Image(new File(TenSided.NINE.toString()).toURI().toString()));
-	        			break;
-	        		case 9:
-	        			imgVTwo.setImage(new Image(new File(TenSided.TEN.toString()).toURI().toString()));
-	        			break;
-	        		}
+        			imgV.setImage(new Image(Object.class.getResource(HundredsPlace.values()[temp/10].toString()).toURI().toString()));
+        			imgVTwo.setImage(new Image(Object.class.getResource(TenSided.values()[temp%10].toString()).toURI().toString()));
         		}
         		aech.getChildren().addAll(imgV,imgVTwo);
 	            imageHolder.getChildren().add(aech);
@@ -748,7 +500,7 @@ public class Utility {
 	        }
 	        else
 	        {
-	        	total=total;
+	        	total+=0;
 	        }
         	imageHolder.getChildren().add(new Text("Your total is: " + total));
         }

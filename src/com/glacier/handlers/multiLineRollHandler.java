@@ -1,5 +1,7 @@
 package com.glacier.handlers;
 
+import java.net.URISyntaxException;
+
 import com.glacier.exceptions.NegativeDiceException;
 import com.glacier.util.Utility;
 
@@ -66,7 +68,16 @@ class multiLineRollHandler implements EventHandler<ActionEvent>
             Scene rollScene = new Scene(aech,Utility.MENU_SIZE,Utility.MENU_SIZE_TWO);
             rollStage.setScene(rollScene);
             rollStage.show();
-        }
+        } 
+        catch (URISyntaxException e)
+        {
+			rollStage.close();
+			results.setText("Oh dear, I can't seem to find the image. \nToss the logs (in /glacier nester/logs) to glaciernester@gmail.com");
+        	e.printStackTrace();
+        	Scene rollScene = new Scene(aech,Utility.MENU_SIZE,Utility.MENU_SIZE_TWO);
+        	rollStage.setScene(rollScene);
+        	rollStage.show();
+		}
     }
     
 }
