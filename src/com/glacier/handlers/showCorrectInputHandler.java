@@ -19,22 +19,26 @@ public class showCorrectInputHandler implements EventHandler<ActionEvent>
 {
 	private boolean oneLineStatus;
 	private boolean multiLineStatus;
+	private Stage toClose;
 
-	public showCorrectInputHandler(boolean oneLineStatus, boolean multiLineStatus)
+	public showCorrectInputHandler(boolean oneLineStatus, boolean multiLineStatus, Stage toClose)
 	{
 		this.oneLineStatus = oneLineStatus;
 		this.multiLineStatus = multiLineStatus;
+		this.toClose = toClose;
 	}
 
     @Override
     public void handle(ActionEvent event) 
     {
+    	//TODO: use java 7 Random and seed it every time the dice roll
         if(oneLineStatus)
         {
         	Stage oneLineStage = new Stage();
             Scene primscene = setupOneLineHandler();
             oneLineStage.setScene(primscene);//make the scene and set it to a window
             oneLineStage.show();//show the menu window
+            toClose.close();
         }
         else if(multiLineStatus)
         {
@@ -42,6 +46,7 @@ public class showCorrectInputHandler implements EventHandler<ActionEvent>
             Scene primscene = setupMultiLineHandler();
             multiLineStage.setScene(primscene);//make the scene and set it to a window
             multiLineStage.show();//show the menu window
+            toClose.close();
         }
     }
 
