@@ -288,13 +288,13 @@ public class Utility {
 	            	switch(temp)
 	            	{
 	            	case 1:
-	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.ONE_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 2:
-	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.TWO_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 3: 
-	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));
+	            		imgV.setImage(new Image(Object.class.getResource(FourSided.THREE_OPTION_ONE.toString()).toURI().toString()));
 	            		break;
 	            	case 4:
 	            		imgV.setImage(new Image(Object.class.getResource(FourSided.FOUR_OPTION_ONE.toString()).toURI().toString()));

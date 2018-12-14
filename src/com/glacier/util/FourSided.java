@@ -18,7 +18,7 @@ public enum FourSided{
 	
 	FourSided()
 	{
-		this.filepath = "/1d4 1 option 1";
+		this.filepath = "/1d4 1 option 1.png";
 	}
 	
 	FourSided(String filepath)
